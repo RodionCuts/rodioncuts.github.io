@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RodionCuts — Шпаргалка цін</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0f;
+  --surface:#16161a;
+  --surface2:#1e1e24;
+  --accent:#c8f135;
+  --accent-dim:rgba(200,241,53,0.1);
+  --text:#f0f0f0;
+  --muted:#8a8a9a;
+  --border:rgba(255,255,255,0.08);
+  --radius:14px;
+  --red:#ff5060;
+  --orange:#ff8c40;
+  --green:#c8f135;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding:40px 24px 60px;
+  max-width:780px;
+  margin:0 auto;
+}
+
+/* HEADER */
+.header{margin-bottom:36px;}
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:22px; font-weight:800;
+  color:var(--accent); margin-bottom:6px;
+}
+.header h1{
+  font-family:'Syne',sans-serif;
+  font-size:32px; font-weight:800;
+  letter-spacing:-0.5px; line-height:1.1;
+  margin-bottom:8px;
+}
+.header p{color:var(--muted);font-size:14px;}
+
+/* SECTION TITLE */
+.section-label{
+  font-size:11px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--accent); margin-bottom:12px;
+}
+
+/* PACKAGES */
+.packages{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+.pkg{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px 18px;
+}
+.pkg.featured{border-color:var(--accent);background:linear-gradient(135deg,rgba(200,241,53,.07),var(--surface));}
+.pkg-badge{
+  display:inline-block;
+  background:var(--accent);color:#0d0d0f;
+  font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;margin-bottom:10px;
+}
+.pkg-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
+.pkg-base{
+  font-family:'Syne',sans-serif;
+  font-size:26px;font-weight:800;
+  color:var(--accent);letter-spacing:-0.5px;
+  margin:10px 0 12px;
+}
+.pkg-base span{font-size:13px;color:var(--muted);font-family:'Inter',sans-serif;font-weight:400;}
+.pkg-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:12px;}
+.pkg-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.pkg-list li{
+  font-size:12px;color:var(--muted);
+  display:flex;align-items:flex-start;gap:8px;
+}
+.pkg-list li::before{
+  content:'✓';
+  color:var(--accent);font-weight:700;
+  flex-shrink:0;margin-top:1px;
+}
+
+/* MULTIPLIER TABLE */
+.mult-table{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:32px;
+}
+.mult-row{
+  display:grid;
+  grid-template-columns:180px 1fr 90px;
+  align-items:center;
+  padding:14px 20px;
+  border-bottom:1px solid var(--border);
+  gap:16px;
+}
+.mult-row:last-child{border-bottom:none;}
+.mult-row.head{
+  background:var(--surface2);
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);
+}
+.mult-factor{font-size:13px;font-weight:600;color:var(--text);}
+.mult-desc{font-size:12px;color:var(--muted);}
+.mult-val{
+  font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:800;
+  text-align:right;
+}
+.up{color:var(--orange);}
+.flat{color:var(--muted);}
+.down{color:var(--accent);}
+
+/* FORMULA */
+.formula-box{
+  background:var(--accent-dim);
+  border:1px solid rgba(200,241,53,.2);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin-bottom:32px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+}
+.formula-part{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;font-weight:600;
+}
+.formula-op{color:var(--muted);font-size:18px;font-weight:300;}
+.formula-result{
+  background:var(--accent);color:#0d0d0f;
+  border-radius:8px;padding:8px 14px;
+  font-size:13px;font-weight:700;
+}
+
+/* EXAMPLES */
+.examples{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;}
+.ex-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 18px 16px;
+}
+.ex-title{font-size:13px;font-weight:700;margin-bottom:10px;}
+.ex-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid var(--border);
+  font-size:12px;
+}
+.ex-row:last-child{border-bottom:none;}
+.ex-row span:first-child{color:var(--muted);}
+.ex-row span:last-child{font-weight:600;}
+.ex-total{
+  display:flex;justify-content:space-between;
+  margin-top:10px;padding-top:10px;
+  border-top:1px solid rgba(200,241,53,.25);
+}
+.ex-total span:first-child{font-size:12px;color:var(--muted);}
+.ex-total span:last-child{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:800;color:var(--accent);
+}
+
+/* TIPS */
+.tips{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tip{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.tip-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.tip-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+.tip-text{font-size:12px;color:var(--muted);line-height:1.55;}
+
+/* PRINT */
+@media print{
+  body{background:#fff;color:#000;padding:20px;}
+  .pkg,.mult-table,.formula-box,.ex-card,.tip{background:#f5f5f5;border:1px solid #ddd;}
+  .accent,.pkg-base,.mult-val.down,.ex-total span:last-child{color:#2a7a00;}
+  .mult-val.up{color:#c04000;}
+  .formula-result{background:#2a7a00;color:#fff;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">RodionCuts</div>
+  <h1>Шпаргалка по цінах</h1>
+  <p>Роздрукуй або тримай поруч — щоб швидко рахувати вартість для клієнта</p>
+</div>
+
+<!-- PACKAGES -->
+<p class="section-label">Пакети</p>
+<div class="packages">
+
+  <div class="pkg">
+    <div class="pkg-name">Базовий</div>
+    <div class="pkg-desc">Проста нарізка, мінімум ефектів. Клієнт хоче швидко і недорого.</div>
+    <div class="pkg-base">500₴ <span>старт</span></div>
+    <ul class="pkg-list">
+      <li>До 60 сек хронометраж</li>
+      <li>Базовий монтаж + колір</li>
+      <li>Очищення звуку</li>
+      <li>Субтитри</li>
+      <li>1 правка</li>
+    </ul>
+  </div>
+
+  <div class="pkg featured">
+    <div class="pkg-badge">Основний</div>
+    <div class="pkg-name">Reels / Shorts</div>
+    <div class="pkg-desc">Повний цикл під ключ. Твій основний продукт — більшість клієнтів беруть це.</div>
+    <div class="pkg-base">900₴ <span>старт</span></div>
+    <ul class="pkg-list">
+      <li>Монтаж + кольоровий лук</li>
+      <li>Анімована графіка</li>
+      <li>Субтитри в тренді</li>
+      <li>Саунд-дизайн</li>
+      <li>2 правки</li>
+    </ul>
+  </div>
+
+  <div class="pkg">
+    <div class="pkg-name">Брендовий</div>
+    <div class="pkg-desc">Компанії, довгі відео, серії. Ціна завжди договірна — рахуй окремо.</div>
+    <div class="pkg-base" style="font-size:18px;margin-top:14px;">Договірна</div>
+    <ul class="pkg-list" style="margin-top:14px;">
+      <li>Будь-який формат і хронометраж</li>
+      <li>Серія — знижка 15–20%</li>
+      <li>Пріоритетна здача</li>
+      <li>Необмежені правки</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- MULTIPLIERS -->
+<p class="section-label">Коефіцієнти — від чого залежить ціна</p>
+<div class="mult-table">
+  <div class="mult-row head">
+    <span>Фактор</span>
+    <span>Деталі</span>
+    <span style="text-align:right">×</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Хронометраж</span>
+    <span class="mult-desc">До 60 сек — база. 60–180 сек — +30–50%. Більше 3 хв — окремо</span>
+    <span class="mult-val up">×1.0–1.5</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Складність монтажу</span>
+    <span class="mult-desc">Проста нарізка — база. Motion graphics, AI-футаж, складні переходи — вище</span>
+    <span class="mult-val up">×1.0–1.6</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Обсяг вихідника</span>
+    <span class="mult-desc">До 20 хв — база. Більше 1 год — більше часу на відбір матеріалу</span>
+    <span class="mult-val up">×1.0–1.3</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Терміновість</span>
+    <span class="mult-desc">Стандарт 24–48г — база. Терміново до 12г — надбавка</span>
+    <span class="mult-val up">+20–30%</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Серія відео</span>
+    <span class="mult-desc">5+ відео одразу — знижка. Вигідно тобі (стабільний потік) і клієнту</span>
+    <span class="mult-val down">−15–20%</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Перший клієнт</span>
+    <span class="mult-desc">Можна зробити одне відео дешевше — щоб показати якість і закрити на серію</span>
+    <span class="mult-val down">−10–20%</span>
+  </div>
+  <div class="mult-row">
+    <span class="mult-factor">Понад 2 правки</span>
+    <span class="mult-desc">3-я і далі — платні. Захищає твій час від нескінченних правок</span>
+    <span class="mult-val up">+100₴/шт</span>
+  </div>
+</div>
+
+<!-- FORMULA -->
+<p class="section-label">Формула розрахунку</p>
+<div class="formula-box">
+  <div class="formula-part">Базова ціна пакету</div>
+  <span class="formula-op">×</span>
+  <div class="formula-part">Складність</div>
+  <span class="formula-op">×</span>
+  <div class="formula-part">Хронометраж</div>
+  <span class="formula-op">+</span>
+  <div class="formula-part">Терміновість</div>
+  <span class="formula-op">−</span>
+  <div class="formula-part">Знижка серії</div>
+  <span class="formula-op">=</span>
+  <div class="formula-result">Фінальна ціна</div>
+</div>
+
+<!-- EXAMPLES -->
+<p class="section-label">Приклади розрахунку</p>
+<div class="examples">
+
+  <div class="ex-card">
+    <div class="ex-title">📱 Reels для блогера — стандарт</div>
+    <div class="ex-row"><span>Пакет Reels / Shorts</span><span>900₴</span></div>
+    <div class="ex-row"><span>Хронометраж 45 сек</span><span>×1.0</span></div>
+    <div class="ex-row"><span>Складність: середня</span><span>×1.0</span></div>
+    <div class="ex-row"><span>Дедлайн: 24 год</span><span>+0</span></div>
+    <div class="ex-total"><span>Разом</span><span>900₴</span></div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-title">⚡ Reels для бренду — терміново</div>
+    <div class="ex-row"><span>Пакет Reels / Shorts</span><span>900₴</span></div>
+    <div class="ex-row"><span>Хронометраж 90 сек</span><span>×1.3</span></div>
+    <div class="ex-row"><span>Motion graphics + AI</span><span>×1.4</span></div>
+    <div class="ex-row"><span>Терміново до 12г</span><span>+25%</span></div>
+    <div class="ex-total"><span>Разом ~</span><span>2 050₴</span></div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-title">📦 Серія 8 Reels / місяць</div>
+    <div class="ex-row"><span>Ціна 1 відео</span><span>900₴</span></div>
+    <div class="ex-row"><span>Кількість</span><span>×8</span></div>
+    <div class="ex-row"><span>Знижка серії</span><span>−15%</span></div>
+    <div class="ex-total"><span>Разом ~</span><span>6 120₴</span></div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-title">🎬 YouTube-відео 7 хвилин</div>
+    <div class="ex-row"><span>Базова ціна (довге)</span><span>2 000₴</span></div>
+    <div class="ex-row"><span>Складний монтаж</span><span>×1.5</span></div>
+    <div class="ex-row"><span>Вихідник 3+ год</span><span>×1.2</span></div>
+    <div class="ex-row"><span>Дедлайн: 48 год</span><span>+0</span></div>
+    <div class="ex-total"><span>Разом ~</span><span>3 600₴</span></div>
+  </div>
+
+</div>
+
+<!-- TIPS -->
+<p class="section-label">Важливо пам'ятати</p>
+<div class="tips">
+  <div class="tip">
+    <span class="tip-icon">💬</span>
+    <div>
+      <div class="tip-title">Завжди питай перед ціною</div>
+      <div class="tip-text">Хронометраж готового відео, скільки вихідника, дедлайн, чи є референс — тільки тоді рахуй.</div>
+    </div>
+  </div>
+  <div class="tip">
+    <span class="tip-icon">🔒</span>
+    <div>
+      <div class="tip-title">Правки — платні з 3-ї</div>
+      <div class="tip-text">Обговори це одразу на старті. Без цього клієнти можуть просити правити нескінченно.</div>
+    </div>
+  </div>
+  <div class="tip">
+    <span class="tip-icon">📈</span>
+    <div>
+      <div class="tip-title">Перший клієнт — це реклама</div>
+      <div class="tip-text">Можна дати знижку, але потім попроси відгук і дозвіл показувати роботу в портфоліо.</div>
+    </div>
+  </div>
+  <div class="tip">
+    <span class="tip-icon">💰</span>
+    <div>
+      <div class="tip-title">Передоплата 50%</div>
+      <div class="tip-text">Завжди бери передоплату до початку роботи. Захищає від ситуацій "передумали".</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

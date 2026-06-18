@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Відеомонтаж — Reels, Shorts, контент для брендів</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0f;
+      --surface: #16161a;
+      --surface2: #1e1e24;
+      --accent: #c8f135;
+      --accent-dim: rgba(200,241,53,0.12);
+      --text: #f0f0f0;
+      --muted: #8a8a9a;
+      --border: rgba(255,255,255,0.07);
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(13,13,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--accent); text-decoration: none; letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switcher {
+      display: flex; align-items: center;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+    }
+    .lang-btn {
+      padding: 7px 14px;
+      font-size: 13px; font-weight: 600;
+      color: var(--muted);
+      background: none; border: none; cursor: pointer;
+      transition: color .2s, background .2s;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: .4px;
+    }
+    .lang-btn.active {
+      background: var(--accent); color: #0d0d0f;
+    }
+    .lang-btn:hover:not(.active) { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent); color: #0d0d0f;
+      padding: 10px 22px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 40px 80px;
+      max-width: 1100px; margin: 0 auto;
+      position: relative;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-dim); border: 1px solid rgba(200,241,53,0.25);
+      color: var(--accent); font-size: 13px; font-weight: 600;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 28px;
+      width: fit-content; letter-spacing: .4px; text-transform: uppercase;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(42px, 6vw, 82px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -2px; margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      font-size: 18px; color: var(--muted); max-width: 560px;
+      line-height: 1.7; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #0d0d0f;
+      padding: 16px 32px; border-radius: 10px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      transition: opacity .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-ghost {
+      border: 1px solid var(--border); color: var(--text);
+      padding: 16px 32px; border-radius: 10px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      transition: border-color .2s, background .2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.04); }
+
+    .hero-stats {
+      display: flex; gap: 48px; margin-top: 64px;
+      padding-top: 40px; border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px; font-weight: 800; color: var(--text);
+      letter-spacing: -1px;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); }
+
+    /* SECTIONS */
+    section { padding: 96px 40px; max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 16px; line-height: 1.1;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 17px;
+      max-width: 520px; line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* FORMAT FILTER */
+    .format-filter {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      font-size: 13px; font-weight: 600;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px; cursor: pointer;
+      transition: all .2s;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: .3px;
+    }
+    .filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,.2); }
+    .filter-btn.active {
+      background: var(--accent); color: #0d0d0f;
+      border-color: var(--accent);
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .portfolio-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      position: relative;
+      transition: border-color .2s, transform .2s, opacity .3s;
+    }
+    /* Vertical formats: Reels, TikTok, Shorts */
+    .portfolio-item[data-format="reels"],
+    .portfolio-item[data-format="tiktok"],
+    .portfolio-item[data-format="shorts"] {
+      aspect-ratio: 9/16;
+    }
+    .portfolio-item.hidden {
+      display: none;
+    }
+    .portfolio-item:hover { border-color: rgba(200,241,53,.3); transform: translateY(-2px); }
+    .portfolio-item iframe { width: 100%; height: 100%; border: none; }
+    .portfolio-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; color: var(--muted);
+      background: var(--surface2);
+    }
+    .portfolio-placeholder svg { opacity: .4; }
+    .portfolio-placeholder span { font-size: 13px; }
+    .portfolio-label {
+      position: absolute; bottom: 14px; left: 14px;
+      background: rgba(13,13,15,.85);
+      backdrop-filter: blur(8px);
+      padding: 6px 12px; border-radius: 6px;
+      font-size: 12px; font-weight: 600; color: var(--text);
+      pointer-events: none;
+    }
+    .portfolio-format-tag {
+      position: absolute; top: 14px; right: 14px;
+      padding: 4px 10px; border-radius: 4px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .5px; text-transform: uppercase;
+      pointer-events: none;
+    }
+    .tag-reels { background: rgba(200,241,53,.2); color: var(--accent); }
+    .tag-tiktok { background: rgba(255,0,80,.15); color: #ff5070; }
+    .tag-shorts { background: rgba(255,100,0,.15); color: #ff8040; }
+    .tag-longform { background: rgba(100,150,255,.15); color: #7090ff; }
+
+    /* SERVICES / PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 20px;
+      transition: border-color .2s;
+    }
+    .pricing-card:hover { border-color: rgba(200,241,53,.25); }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(200,241,53,.06) 0%, var(--surface) 60%);
+    }
+    .pricing-badge {
+      display: inline-block;
+      background: var(--accent); color: #0d0d0f;
+      font-size: 11px; font-weight: 700; letter-spacing: .5px;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      width: fit-content;
+    }
+    .pricing-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; }
+    .pricing-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px; font-weight: 800; color: var(--accent);
+      letter-spacing: -1px; line-height: 1;
+    }
+    .pricing-price span { font-size: 16px; color: var(--muted); font-family: 'Inter', sans-serif; font-weight: 400; }
+    .pricing-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .pricing-list li {
+      font-size: 14px; color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pricing-list li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23c8f135' opacity='.15'/%3E%3Cpath d='M5 8l2 2 4-4' stroke='%23c8f135' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .pricing-cta {
+      margin-top: auto;
+      display: block; text-align: center;
+      padding: 13px 20px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--border); color: var(--text);
+      transition: background .2s, border-color .2s;
+    }
+    .pricing-cta:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2); }
+    .pricing-card.featured .pricing-cta {
+      background: var(--accent); color: #0d0d0f;
+      border-color: var(--accent);
+    }
+    .pricing-card.featured .pricing-cta:hover { opacity: .88; }
+
+    /* REVIEWS */
+    .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .review-stars { color: var(--accent); font-size: 15px; letter-spacing: 2px; }
+    .review-text { font-size: 15px; line-height: 1.7; color: var(--text); }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent-dim); border: 1px solid rgba(200,241,53,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px; color: var(--accent);
+    }
+    .review-name { font-weight: 600; font-size: 14px; }
+    .review-role { font-size: 12px; color: var(--muted); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .about-body { color: var(--muted); font-size: 16px; line-height: 1.8; }
+    .about-body p + p { margin-top: 16px; }
+
+    /* TOOLS SECTION (from screenshot) */
+    .tools-section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .tools-list {
+      display: flex; flex-direction: column; gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .tools-list-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border);
+      transition: background .2s;
+    }
+    .tools-list-item:last-child { border-bottom: none; }
+    .tools-list-item:hover { background: var(--surface2); }
+    .tools-item-name {
+      font-size: 15px; font-weight: 500; color: var(--text);
+    }
+    .tools-item-tag {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: var(--surface);
+      border: 1px solid rgba(200,241,53,.2);
+      border-radius: 24px;
+      padding: 64px 56px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 200px;
+      background: radial-gradient(ellipse, rgba(200,241,53,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-banner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 14px; line-height: 1.15;
+    }
+    .cta-banner p {
+      color: var(--muted); font-size: 17px;
+      margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+    .cta-contacts { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* CONTACT */
+    #contact { padding-bottom: 48px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color .2s, transform .2s;
+    }
+    .contact-card:hover { border-color: rgba(200,241,53,.3); transform: translateY(-2px); }
+    .contact-icon { font-size: 22px; }
+    .contact-platform { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+    .contact-handle { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; }
+    .contact-hint { font-size: 13px; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* DIVIDER */
+    .full-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 120px 20px 60px; }
+      section { padding: 64px 20px; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-item[data-format="reels"],
+      .portfolio-item[data-format="tiktok"],
+      .portfolio-item[data-format="shorts"] { aspect-ratio: 9/16; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+      .cta-banner { padding: 40px 24px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* i18n hidden */
+    [data-lang] { display: none; }
+    [data-lang].visible { display: inherit; }  
+ 
+    span[data-lang].visible { display: inline; }
+    p[data-lang].visible { display: block; }
+    li[data-lang].visible { display: flex; }
+    a[data-lang].visible { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">RodionCuts</a>
+  <ul class="nav-links">
+    <li><a href="#portfolio" data-lang="uk" class="visible">Портфоліо</a><a href="#portfolio" data-lang="en">Portfolio</a></li>
+    <li><a href="#pricing" data-lang="uk" class="visible">Послуги</a><a href="#pricing" data-lang="en">Services</a></li>
+    <li><a href="#about" data-lang="uk" class="visible">Навички</a><a href="#about" data-lang="en">Skills</a></li>
+    <li><a href="#about" data-lang="uk" class="visible">Про мене</a><a href="#about" data-lang="en">About</a></li>
+    <li><a href="#contact" data-lang="uk" class="visible">Контакти</a><a href="#contact" data-lang="en">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('uk')">UA</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="nav-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="uk" style="display:inline-block">Написати в Telegram</a>
+    <a class="nav-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="en" style="display:none">Write on Telegram</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- UA -->
+  <div class="hero-eyebrow" data-lang="uk" class="visible" style="display:inline-flex">Монтаж для брендів і контент-мейкерів</div>
+  <h1 data-lang="uk" class="visible" style="display:block">Сирий матеріал →<br><em>відео, що продає</em></h1>
+  <p class="hero-sub" data-lang="uk" class="visible" style="display:block">
+    Монтую Reels, Shorts та брендові відео під ключ — з кольором, звуком, субтитрами та анімацією.
+    Ви надсилаєте матеріал, отримуєте готове відео до публікації.
+  </p>
+  <div class="hero-actions" data-lang="uk" class="visible" style="display:flex">
+    <a class="btn-primary" href="https://t.me/ВАШ_НІК" target="_blank">Написати в Telegram</a>
+    <a class="btn-ghost" href="#portfolio">Дивитись роботи</a>
+  </div>
+  <!-- EN -->
+  <div class="hero-eyebrow" data-lang="en" style="display:none">Video editing for brands & creators</div>
+  <h1 data-lang="en" style="display:none">Raw footage →<br><em>video that sells</em></h1>
+  <p class="hero-sub" data-lang="en" style="display:none">
+    I edit Reels, Shorts and branded videos end-to-end — color, sound, subtitles and animation.
+    You send the raw footage, you get a publish-ready video.
+  </p>
+  <div class="hero-actions" data-lang="en" style="display:none">
+    <a class="btn-primary" href="https://t.me/ВАШ_НІК" target="_blank">Write on Telegram</a>
+    <a class="btn-ghost" href="#portfolio">See my work</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">50+</span>
+      <span class="stat-label" data-lang="uk" class="visible" style="display:inline">Відео змонтовано</span>
+      <span class="stat-label" data-lang="en" style="display:none">Videos edited</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">10+</span>
+      <span class="stat-label" data-lang="uk" class="visible" style="display:inline">Брендів та клієнтів</span>
+      <span class="stat-label" data-lang="en" style="display:none">Brands & clients</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">24г</span>
+      <span class="stat-label" data-lang="uk" class="visible" style="display:inline">Середній час здачі</span>
+      <span class="stat-label" data-lang="en" style="display:none">Avg delivery time</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Camotec</span>
+      <span class="stat-label" data-lang="uk" class="visible" style="display:inline">Серед клієнтів</span>
+      <span class="stat-label" data-lang="en" style="display:none">Among clients</span>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider" />
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <p class="section-eyebrow" data-lang="uk" class="visible" style="display:block">Портфоліо</p>
+  <p class="section-eyebrow" data-lang="en" style="display:none">Portfolio</p>
+  <h2 class="section-title" data-lang="uk" class="visible" style="display:block">Роботи</h2>
+  <h2 class="section-title" data-lang="en" style="display:none">Work</h2>
+  <p class="section-sub" data-lang="uk" class="visible" style="display:block">
+    Нижче — приклади змонтованих відео. Замінить плейсхолдери на ваші iframe з YouTube/Vimeo.
+  </p>
+  <p class="section-sub" data-lang="en" style="display:none">
+    Examples of edited videos below. Replace placeholders with your YouTube/Vimeo iframes.
+  </p>
+
+  <!-- FORMAT FILTER -->
+  <div class="format-filter">
+    <button class="filter-btn active" onclick="filterPortfolio('all', this)" data-lang-uk="Всі" data-lang-en="All">Всі</button>
+    <button class="filter-btn" onclick="filterPortfolio('reels', this)" data-lang-uk="Reels" data-lang-en="Reels">Reels</button>
+    <button class="filter-btn" onclick="filterPortfolio('tiktok', this)" data-lang-uk="TikTok" data-lang-en="TikTok">TikTok</button>
+    <button class="filter-btn" onclick="filterPortfolio('shorts', this)" data-lang-uk="Shorts" data-lang-en="Shorts">Shorts</button>
+    <button class="filter-btn" onclick="filterPortfolio('longform', this)" data-lang-uk="Long Form" data-lang-en="Long Form">Long Form</button>
+  </div>
+
+  <div class="portfolio-grid">
+
+    <div class="portfolio-item" data-format="reels">
+      <div class="portfolio-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#8a8a9a" stroke-width="1.5"/><path d="M16 14l12 6-12 6V14z" fill="#8a8a9a"/></svg>
+        <span data-lang="uk" class="visible" style="display:inline">Вставте відео 1</span>
+        <span data-lang="en" style="display:none">Insert video 1</span>
+      </div>
+      <span class="portfolio-label">Reels · Бренд</span>
+      <span class="portfolio-format-tag tag-reels">Reels</span>
+    </div>
+
+    <div class="portfolio-item" data-format="shorts">
+      <div class="portfolio-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#8a8a9a" stroke-width="1.5"/><path d="M16 14l12 6-12 6V14z" fill="#8a8a9a"/></svg>
+        <span data-lang="uk" class="visible" style="display:inline">Вставте відео 2</span>
+        <span data-lang="en" style="display:none">Insert video 2</span>
+      </div>
+      <span class="portfolio-label">Shorts · Продукт</span>
+      <span class="portfolio-format-tag tag-shorts">Shorts</span>
+    </div>
+
+    <div class="portfolio-item" data-format="tiktok">
+      <div class="portfolio-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#8a8a9a" stroke-width="1.5"/><path d="M16 14l12 6-12 6V14z" fill="#8a8a9a"/></svg>
+        <span data-lang="uk" class="visible" style="display:inline">Вставте відео 3</span>
+        <span data-lang="en" style="display:none">Insert video 3</span>
+      </div>
+      <span class="portfolio-label">TikTok · Контент</span>
+      <span class="portfolio-format-tag tag-tiktok">TikTok</span>
+    </div>
+
+    <div class="portfolio-item" data-format="longform">
+      <div class="portfolio-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#8a8a9a" stroke-width="1.5"/><path d="M16 14l12 6-12 6V14z" fill="#8a8a9a"/></svg>
+        <span data-lang="uk" class="visible" style="display:inline">Вставте відео 4</span>
+        <span data-lang="en" style="display:none">Insert video 4</span>
+      </div>
+      <span class="portfolio-label">YouTube · Брендове</span>
+      <span class="portfolio-format-tag tag-longform">Long Form</span>
+    </div>
+
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-eyebrow" data-lang="uk" class="visible" style="display:block">Послуги та ціни</p>
+  <p class="section-eyebrow" data-lang="en" style="display:none">Services & Pricing</p>
+  <h2 class="section-title" data-lang="uk" class="visible" style="display:block">Що отримуєте</h2>
+  <h2 class="section-title" data-lang="en" style="display:none">What you get</h2>
+  <p class="section-sub" data-lang="uk" class="visible" style="display:block">
+    Три пакети під різні задачі. Ціна залежить від хронометражу — напишіть, порахую за 10 хвилин.
+  </p>
+  <p class="section-sub" data-lang="en" style="display:none">
+    Three packages for different needs. Price depends on length — message me and I'll quote in 10 minutes.
+  </p>
+
+  <div class="pricing-grid">
+
+    <div class="pricing-card">
+      <div>
+        <p class="pricing-name" data-lang="uk" class="visible" style="display:block">Базовий</p>
+        <p class="pricing-name" data-lang="en" style="display:none">Basic</p>
+        <p class="pricing-desc" data-lang="uk" class="visible" style="display:block">Швидкий монтаж одного відео для соцмереж.</p>
+        <p class="pricing-desc" data-lang="en" style="display:none">Quick edit of a single video for social media.</p>
+      </div>
+      <div class="pricing-price">від 500₴ <span data-lang="uk" class="visible" style="display:inline">/ відео</span><span data-lang="en" style="display:none">/ video</span></div>
+      <ul class="pricing-list">
+        <li data-lang="uk" class="visible">Монтаж до 60 сек</li>
+        <li data-lang="uk" class="visible">Базова корекція кольору</li>
+        <li data-lang="uk" class="visible">Очищення звуку</li>
+        <li data-lang="uk" class="visible">Субтитри</li>
+        <li data-lang="uk" class="visible">1 правка</li>
+        <li data-lang="en">Edit up to 60 sec</li>
+        <li data-lang="en">Basic color correction</li>
+        <li data-lang="en">Audio cleanup</li>
+        <li data-lang="en">Subtitles</li>
+        <li data-lang="en">1 revision</li>
+      </ul>
+      <a class="pricing-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="uk" class="visible" style="display:block">Замовити</a>
+      <a class="pricing-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="en" style="display:none">Order</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="pricing-badge" data-lang="uk" class="visible" style="display:inline-block">Популярний</div>
+      <div class="pricing-badge" data-lang="en" style="display:none">Popular</div>
+      <div>
+        <p class="pricing-name">Reels / Shorts</p>
+        <p class="pricing-desc" data-lang="uk" class="visible" style="display:block">Повний цикл — від сирого матеріалу до готового відео під публікацію.</p>
+        <p class="pricing-desc" data-lang="en" style="display:none">Full cycle — from raw footage to a publish-ready video.</p>
+      </div>
+      <div class="pricing-price">від 900₴ <span data-lang="uk" class="visible" style="display:inline">/ відео</span><span data-lang="en" style="display:none">/ video</span></div>
+      <ul class="pricing-list">
+        <li data-lang="uk" class="visible">Монтаж під ключ</li>
+        <li data-lang="uk" class="visible">Колір + лук</li>
+        <li data-lang="uk" class="visible">Субтитри + анімація</li>
+        <li data-lang="uk" class="visible">Звукова обробка</li>
+        <li data-lang="uk" class="visible">Графіка та переходи</li>
+        <li data-lang="uk" class="visible">2 правки</li>
+        <li data-lang="en">Full turnkey edit</li>
+        <li data-lang="en">Color + look</li>
+        <li data-lang="en">Subtitles + animation</li>
+        <li data-lang="en">Sound design</li>
+        <li data-lang="en">Graphics & transitions</li>
+        <li data-lang="en">2 revisions</li>
+      </ul>
+      <a class="pricing-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="uk" class="visible" style="display:block">Замовити</a>
+      <a class="pricing-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="en" style="display:none">Order</a>
+    </div>
+
+    <div class="pricing-card">
+      <div>
+        <p class="pricing-name" data-lang="uk" class="visible" style="display:block">Брендовий</p>
+        <p class="pricing-name" data-lang="en" style="display:none">Brand</p>
+        <p class="pricing-desc" data-lang="uk" class="visible" style="display:block">Для компаній — довше відео або серія з регулярною підтримкою.</p>
+        <p class="pricing-desc" data-lang="en" style="display:none">For companies — longer videos or a series with ongoing support.</p>
+      </div>
+      <div class="pricing-price" data-lang="uk" class="visible" style="display:block">за домовленістю</div>
+      <div class="pricing-price" data-lang="en" style="display:none">on request</div>
+      <ul class="pricing-list">
+        <li data-lang="uk" class="visible">Відео будь-якого формату</li>
+        <li data-lang="uk" class="visible">Серія відео — знижка</li>
+        <li data-lang="uk" class="visible">Пріоритетна здача</li>
+        <li data-lang="uk" class="visible">Заставки, інтро, аутро</li>
+        <li data-lang="uk" class="visible">Необмежені правки</li>
+        <li data-lang="en">Any video format</li>
+        <li data-lang="en">Series discount</li>
+        <li data-lang="en">Priority delivery</li>
+        <li data-lang="en">Intro, outro, bumpers</li>
+        <li data-lang="en">Unlimited revisions</li>
+      </ul>
+      <a class="pricing-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="uk" class="visible" style="display:block">Обговорити</a>
+      <a class="pricing-cta" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="en" style="display:none">Discuss</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-eyebrow" data-lang="uk" class="visible" style="display:block">Відгуки</p>
+  <p class="section-eyebrow" data-lang="en" style="display:none">Reviews</p>
+  <h2 class="section-title" data-lang="uk" class="visible" style="display:block">Що кажуть клієнти</h2>
+  <h2 class="section-title" data-lang="en" style="display:none">What clients say</h2>
+  <p class="section-sub" data-lang="uk" class="visible" style="display:block">
+    Замінить ці блоки на реальні відгуки. Навіть один справжній відгук конвертує краще за будь-який текст.
+  </p>
+  <p class="section-sub" data-lang="en" style="display:none">
+    Replace these with real reviews. Even one genuine testimonial converts better than any copy.
+  </p>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-lang="uk" class="visible" style="display:block">
+        «Тут буде реальний відгук вашого клієнта. Попросіть людей, з якими вже працювали, написати кілька речень — це найсильніший елемент конверсії на сторінці.»
+      </p>
+      <p class="review-text" data-lang="en" style="display:none">
+        "This is where a real client review goes. Ask people you've worked with to write a few sentences — it's the strongest conversion element on the page."
+      </p>
+      <div class="review-author">
+        <div class="review-avatar">CA</div>
+        <div>
+          <p class="review-name">Camotec</p>
+          <p class="review-role" data-lang="uk" class="visible" style="display:block">Бренд амуніції</p>
+          <p class="review-role" data-lang="en" style="display:none">Ammunition brand</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text" data-lang="uk" class="visible" style="display:block">
+        «Другий відгук. Вкажіть конкретний результат: "відео набрало 80к переглядів за тиждень" — цифри працюють краще за слова.»
+      </p>
+      <p class="review-text" data-lang="en" style="display:none">
+        "Second review. Include a specific result: 'the video hit 80k views in a week' — numbers work better than words."
+      </p>
+      <div class="review-author">
+        <div class="review-avatar">КЛ</div>
+        <div>
+          <p class="review-name" data-lang="uk" class="visible" style="display:block">Клієнт 2</p>
+          <p class="review-name" data-lang="en" style="display:none">Client 2</p>
+          <p class="review-role" data-lang="uk" class="visible" style="display:block">Контент-мейкер</p>
+          <p class="review-role" data-lang="en" style="display:none">Content creator</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-eyebrow" data-lang="uk" class="visible" style="display:block">Про мене</p>
+      <p class="section-eyebrow" data-lang="en" style="display:none">About me</p>
+      <h2 class="section-title" data-lang="uk" class="visible" style="display:block">Весь цикл — сам</h2>
+      <h2 class="section-title" data-lang="en" style="display:none">Full cycle — solo</h2>
+      <div class="about-body">
+        <p data-lang="uk" class="visible" style="display:block">
+          Монтую відео для брендів, підприємців та контент-мейкерів.
+          Ви надсилаєте сирий матеріал — отримуєте готове відео під публікацію.
+          Без зайвих узгоджень.
+        </p>
+        <p data-lang="uk" class="visible" style="display:block">
+          Роблю весь цикл самостійно: монтаж, корекція кольору, звукова обробка,
+          субтитри, анімована графіка. Працював із брендом Camotec.
+        </p>
+        <p data-lang="uk" class="visible" style="display:block">
+          Здаю у строк. Якщо не влаштує — правлю до результату.
+        </p>
+        <p data-lang="en" style="display:none">
+          I edit videos for brands, entrepreneurs and content creators.
+          You send the raw footage — you get a publish-ready video back.
+          No unnecessary back-and-forth.
+        </p>
+        <p data-lang="en" style="display:none">
+          I handle the full cycle myself: editing, color grading, sound design,
+          subtitles, motion graphics. Worked with the brand Camotec.
+        </p>
+        <p data-lang="en" style="display:none">
+          Delivered on time. If you're not happy — I'll revise until you are.
+        </p>
+      </div>
+    </div>
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:16px;" data-lang="uk" class="visible" style="display:block">Інструменти та навички</p>
+      <p class="section-eyebrow" style="margin-bottom:16px;" data-lang="en" style="display:none">Tools & Skills</p>
+      <div class="tools-list">
+        <div class="tools-list-item">
+          <span class="tools-item-name">DaVinci Resolve Studio 20</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">ОСНОВНИЙ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">PRIMARY</span>
+        </div>
+        <div class="tools-list-item">
+          <span class="tools-item-name" data-lang="uk" class="visible" style="display:inline">Кольорокорекція</span>
+          <span class="tools-item-name" data-lang="en" style="display:none">Color Grading</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">БАЗОВА + ХУДОЖНЯ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">TECHNICAL + CREATIVE</span>
+        </div>
+        <div class="tools-list-item">
+          <span class="tools-item-name">Motion Graphics</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">ПЛАШКИ, АНІМАЦІЯ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">TITLES, ANIMATION</span>
+        </div>
+        <div class="tools-list-item">
+          <span class="tools-item-name" data-lang="uk" class="visible" style="display:inline">Саунд-дизайн</span>
+          <span class="tools-item-name" data-lang="en" style="display:none">Sound Design</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">ЗВУК, МУЗИКА, ЕФЕКТИ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">AUDIO, MUSIC, SFX</span>
+        </div>
+        <div class="tools-list-item">
+          <span class="tools-item-name">AI-інструменти (Veo, Grok)</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">ЕФЕКТИ, ФУТАЖІ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">EFFECTS, FOOTAGE</span>
+        </div>
+        <div class="tools-list-item">
+          <span class="tools-item-name" data-lang="uk" class="visible" style="display:inline">Субтитри</span>
+          <span class="tools-item-name" data-lang="en" style="display:none">Subtitles</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">ТРЕНДОВІ, АВТОРСЬКІ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">TRENDY, CUSTOM</span>
+        </div>
+        <div class="tools-list-item">
+          <span class="tools-item-name">Reels / Shorts / TikTok / YouTube</span>
+          <span class="tools-item-tag" data-lang="uk" class="visible" style="display:inline">ФОРМАТИ</span>
+          <span class="tools-item-tag" data-lang="en" style="display:none">FORMATS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- CTA BANNER -->
+<section>
+  <div class="cta-banner">
+    <h2 data-lang="uk" class="visible" style="display:block">Надішліть відео — скажу,<br>що з ним можна зробити</h2>
+    <h2 data-lang="en" style="display:none">Send your footage —<br>I'll tell you what we can do with it</h2>
+    <p data-lang="uk" class="visible" style="display:block">Безкоштовна оцінка. Напишіть у Telegram — відповім за годину.</p>
+    <p data-lang="en" style="display:none">Free assessment. Message me on Telegram — I reply within an hour.</p>
+    <div class="cta-contacts">
+      <a class="btn-primary" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="uk" class="visible" style="display:inline-block">Telegram</a>
+      <a class="btn-ghost" href="mailto:ВАШ@EMAIL.COM" data-lang="uk" class="visible" style="display:inline-block">Email</a>
+      <a class="btn-primary" href="https://t.me/ВАШ_НІК" target="_blank" data-lang="en" style="display:none">Telegram</a>
+      <a class="btn-ghost" href="mailto:ВАШ@EMAIL.COM" data-lang="en" style="display:none">Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contact" style="padding-top:0;">
+  <p class="section-eyebrow" style="margin-bottom:24px;" data-lang="uk" class="visible" style="display:block">Контакти</p>
+  <p class="section-eyebrow" style="margin-bottom:24px;" data-lang="en" style="display:none">Contact</p>
+  <div class="contact-grid">
+    <a class="contact-card" href="https://t.me/ВАШ_НІК" target="_blank">
+      <span class="contact-icon">✈️</span>
+      <span class="contact-platform">Telegram</span>
+      <span class="contact-handle">@ВАШ_НІК</span>
+      <span class="contact-hint" data-lang="uk" class="visible" style="display:inline">Відповідаю за годину</span>
+      <span class="contact-hint" data-lang="en" style="display:none">Reply within an hour</span>
+    </a>
+    <a class="contact-card" href="mailto:ВАШ@EMAIL.COM">
+      <span class="contact-icon">✉️</span>
+      <span class="contact-platform">Email</span>
+      <span class="contact-handle">ВАШ@EMAIL.COM</span>
+      <span class="contact-hint" data-lang="uk" class="visible" style="display:inline">Для офіційних запитів</span>
+      <span class="contact-hint" data-lang="en" style="display:none">For official requests</span>
+    </a>
+    <a class="contact-card" href="https://instagram.com/ВАШ_НІК" target="_blank">
+      <span class="contact-icon">📷</span>
+      <span class="contact-platform">Instagram</span>
+      <span class="contact-handle">@ВАШ_НІК</span>
+      <span class="contact-hint" data-lang="uk" class="visible" style="display:inline">Приклади робіт</span>
+      <span class="contact-hint" data-lang="en" style="display:none">Work examples</span>
+    </a>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<footer>
+  <p>© 2025 · <span data-lang="uk" class="visible" style="display:inline">Відеомонтаж під ключ</span><span data-lang="en" style="display:none">Video editing end-to-end</span></p>
+  <a href="https://t.me/ВАШ_НІК" target="_blank" data-lang="uk" class="visible" style="display:inline">Написати в Telegram →</a>
+  <a href="https://t.me/ВАШ_НІК" target="_blank" data-lang="en" style="display:none">Write on Telegram →</a>
+</footer>
+
+<script>
+  // ── LANGUAGE SWITCHER ──
+  let currentLang = 'uk';
+
+  function setLang(lang) {
+    currentLang = lang;
+
+    // Toggle button states
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(lang === 'uk' ? 'ua' : 'en'));
+    });
+
+    // Show/hide all lang elements
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      if (el.getAttribute('data-lang') === lang) {
+        el.style.display = getDefaultDisplay(el);
+      } else {
+        el.style.display = 'none';
+      }
+    });
+
+    // Update filter button labels
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const label = btn.getAttribute('data-lang-' + lang);
+      if (label) btn.textContent = label;
+    });
+
+    // Update html lang
+    document.documentElement.lang = lang;
+  }
+
+ /* function getDefaultDisplay(el) {
+    const tag = el.tagName.toLowerCase();
+    if (['div', 'p', 'h1', 'h2', 'h3', 'h4', 'section', 'ul', 'ol'].includes(tag)) return 'block';
+    if (tag === 'li') return 'flex';
+    if (tag === 'a') {
+      if (el.classList.contains('nav-cta') || el.classList.contains('pricing-cta') || el.classList.contains('btn-primary') || el.classList.contains('btn-ghost')) return 'inline-block';
+      return 'block';
+    }
+    return 'inline';
+  } */
+
+  
+  function getDefaultDisplay(el) {
+    const tag = el.tagName.toLowerCase();
+    if (el.classList.contains('hero-eyebrow')) return 'inline-flex'; // Исправляет отображение плашки в Hero
+    if (['div', 'p', 'h1', 'h2', 'h3', 'h4', 'section', 'ul', 'ol'].includes(tag)) return 'block';
+    if (tag === 'li') return 'flex'; // Исправляет отображение списков в ценах
+    if (tag === 'a') {
+      if (el.classList.contains('nav-cta') || el.classList.contains('pricing-cta') || el.classList.contains('btn-primary') || el.classList.contains('btn-ghost')) return 'inline-block';
+      return 'block';
+    }
+    return 'inline';
+  }
+
+  // ── PORTFOLIO FILTER ──
+  function filterPortfolio(format, btn) {
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide items
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      if (format === 'all' || item.getAttribute('data-format') === format) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => setLang('uk'));
+</script>
+
+</body>
+</html>
