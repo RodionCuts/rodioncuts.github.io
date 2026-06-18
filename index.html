@@ -325,28 +325,49 @@
 
       /* PORTFOLIO */
       .portfolio-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+      .portfolio-row {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        gap: 16px;
         align-items: start;
+      }
+      .portfolio-row.vertical-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .portfolio-row.horizontal-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .portfolio-row-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: -32px;
+        padding-left: 2px;
+      }
+      .portfolio-row.hidden-row {
+        display: none;
       }
       .portfolio-item {
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         overflow: hidden;
-        aspect-ratio: 16/9;
         position: relative;
         transition:
           border-color 0.2s,
           transform 0.2s,
           opacity 0.3s;
       }
-      /* Vertical formats: Reels, TikTok, Shorts */
-      .portfolio-item[data-format="reels"],
-      .portfolio-item[data-format="tiktok"],
-      .portfolio-item[data-format="shorts"] {
+      .vertical-row .portfolio-item {
         aspect-ratio: 9/16;
+      }
+      .horizontal-row .portfolio-item {
+        aspect-ratio: 16/9;
       }
       .portfolio-item.hidden {
         display: none;
@@ -784,13 +805,11 @@
         section {
           padding: 64px 20px;
         }
-        .portfolio-grid {
+        .portfolio-row.vertical-row {
           grid-template-columns: repeat(2, 1fr);
         }
-        .portfolio-item[data-format="reels"],
-        .portfolio-item[data-format="tiktok"],
-        .portfolio-item[data-format="shorts"] {
-          aspect-ratio: 9/16;
+        .portfolio-row.horizontal-row {
+          grid-template-columns: 1fr;
         }
         .pricing-grid {
           grid-template-columns: 1fr;
@@ -1085,170 +1104,48 @@
       </div>
 
       <div class="portfolio-grid">
-        <!--    <div class="portfolio-item" data-format="reels">
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            frameborder="0"
-            allowfullscreen
-            style="width: 100%; aspect-ratio: 9/16; border-radius: 12px"
-          >
-          </iframe>
-          <span class="portfolio-label">Reels · Бренд</span>
-          <span class="portfolio-format-tag tag-reels">Reels</span>
-        </div> -->
 
-        <!--  <div class="portfolio-item" data-format="reels">
-          <div class="portfolio-placeholder">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle
-                cx="20"
-                cy="20"
-                r="18"
-                stroke="#8a8a9a"
-                stroke-width="1.5"
-              />
-              <path d="M16 14l12 6-12 6V14z" fill="#8a8a9a" />
-            </svg>
-            <span data-lang="uk" class="visible" style="display: inline"
-              >Вставте відео 1</span
-            >
-            <span data-lang="en" style="display: none">Insert video 1</span>
+        <!-- ── ВЕРТИКАЛЬНІ: Reels / Shorts / TikTok ── -->
+        <p class="portfolio-row-label" data-lang="uk" class="visible" style="display:block">Reels / Shorts / TikTok</p>
+        <p class="portfolio-row-label" data-lang="en" style="display:none">Reels / Shorts / TikTok</p>
+        <div class="portfolio-row vertical-row" data-row="vertical">
+          <div class="portfolio-item" data-format="reels">
+            <iframe
+              src="https://www.youtube.com/embed/TA4OHEIZLI0"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+            <span class="portfolio-label">Reels · Бренд</span>
+            <span class="portfolio-format-tag tag-reels">Reels</span>
           </div>
-          <span class="portfolio-label">Reels · Бренд</span>
-          <span class="portfolio-format-tag tag-reels">Reels</span>
-        </div> -->
-
-        <!--   <div class="portfolio-item" data-format="shorts">
-          <div class="portfolio-placeholder">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle
-                cx="20"
-                cy="20"
-                r="18"
-                stroke="#8a8a9a"
-                stroke-width="1.5"
-              />
-              <path d="M16 14l12 6-12 6V14z" fill="#8a8a9a" />
-            </svg>
-            <span data-lang="uk" class="visible" style="display: inline"
-              >Вставте відео 2</span
-            >
-            <span data-lang="en" style="display: none">Insert video 2</span>
-          </div>
-          <span class="portfolio-label">Shorts · Продукт</span>
-          <span class="portfolio-format-tag tag-shorts">Shorts</span>
-        </div> -->
-
-        <!--  <div class="portfolio-item" data-format="tiktok">
-          <div class="portfolio-placeholder">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle
-                cx="20"
-                cy="20"
-                r="18"
-                stroke="#8a8a9a"
-                stroke-width="1.5"
-              />
-              <path d="M16 14l12 6-12 6V14z" fill="#8a8a9a" />
-            </svg>
-            <span data-lang="uk" class="visible" style="display: inline"
-              >Вставте відео 3</span
-            >
-            <span data-lang="en" style="display: none">Insert video 3</span>
-          </div>
-          <span class="portfolio-label">TikTok · Контент</span>
-          <span class="portfolio-format-tag tag-tiktok">TikTok</span>
-        </div> -->
-
-        <!-- <div class="portfolio-item" data-format="longform">
-          <div class="portfolio-placeholder">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle
-                cx="20"
-                cy="20"
-                r="18"
-                stroke="#8a8a9a"
-                stroke-width="1.5"
-              />
-              <path d="M16 14l12 6-12 6V14z" fill="#8a8a9a" />
-            </svg>
-            <span data-lang="uk" class="visible" style="display: inline"
-              >Вставте відео 4</span
-            >
-            <span data-lang="en" style="display: none">Insert video 4</span>
-          </div>
-          <span class="portfolio-label">YouTube · Брендове</span>
-          <span class="portfolio-format-tag tag-longform">Long Form</span>
-        </div> -->
-        <!-- 
-        <div class="portfolio-item" data-format="longform">
-          <div class="portfolio-placeholder">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle
-                cx="20"
-                cy="20"
-                r="18"
-                stroke="#8a8a9a"
-                stroke-width="1.5"
-              />
-              <path d="M16 14l12 6-12 6V14z" fill="#8a8a9a" />
-            </svg>
-            <span data-lang="uk" class="visible" style="display: inline"
-              >Вставте відео 4</span
-            >
-            <span data-lang="en" style="display: none">Insert video 4</span>
-          </div>
-          <span class="portfolio-label">YouTube · Брендове</span>
-          <span class="portfolio-format-tag tag-longform">Long Form</span>
-        </div> -->
-
-         <div class="portfolio-item" data-format="longform">
-          <iframe
-            src="https://www.youtube.com/embed/ВІДЕО_ID"
-            frameborder="0"
-            allowfullscreen
-            style="width: 100%; aspect-ratio: 16/9; border-radius: 12px"
-          >
-          </iframe>
-          <span class="portfolio-label">YouTube · Брендове</span>
-          <span class="portfolio-format-tag tag-longform">Long Form</span>
-        </div>
-        
-        <div class="portfolio-item" data-format="reels">
-          <iframe
-            src="https://www.youtube.com/embed/TA4OHEIZLI0"
-            frameborder="0"
-            allowfullscreen
-            style="width: 100%; aspect-ratio: 9/16; border-radius: 12px"
-          >
-          </iframe>
-          <span class="portfolio-label">Reels · Бренд</span>
-          <span class="portfolio-format-tag tag-reels">Reels</span>
+          <!-- Додай більше вертикальних відео сюди -->
         </div>
 
-        <div class="portfolio-item" data-format="longform">
-          <iframe
-            src="https://www.youtube.com/embed/MoYsUYuj4oU"
-            frameborder="0"
-            allowfullscreen
-            style="width: 100%; aspect-ratio: 16/9; border-radius: 12px"
-          >
-          </iframe>
-          <span class="portfolio-label">YouTube · Брендове</span>
-          <span class="portfolio-format-tag tag-longform">Long Form</span>
+        <!-- ── ГОРИЗОНТАЛЬНІ: Long Form ── -->
+        <p class="portfolio-row-label" data-lang="uk" class="visible" style="display:block">Long Form</p>
+        <p class="portfolio-row-label" data-lang="en" style="display:none">Long Form</p>
+        <div class="portfolio-row horizontal-row" data-row="horizontal">
+          <div class="portfolio-item" data-format="longform">
+            <iframe
+              src="https://www.youtube.com/embed/MoYsUYuj4oU"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+            <span class="portfolio-label">YouTube · Брендове</span>
+            <span class="portfolio-format-tag tag-longform">Long Form</span>
+          </div>
+          <div class="portfolio-item" data-format="longform">
+            <iframe
+              src="https://www.youtube.com/embed/kXf-C9k2v_Q"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+            <span class="portfolio-label">YouTube · Брендове</span>
+            <span class="portfolio-format-tag tag-longform">Long Form</span>
+          </div>
+          <!-- Додай більше горизонтальних відео сюди -->
         </div>
 
-        <div class="portfolio-item" data-format="longform">
-          <iframe
-            src="https://www.youtube.com/embed/kXf-C9k2v_Q"
-            frameborder="0"
-            allowfullscreen
-            style="width: 100%; aspect-ratio: 16/9; border-radius: 12px"
-          >
-          </iframe>
-          <span class="portfolio-label">YouTube · Брендове</span>
-          <span class="portfolio-format-tag tag-longform">Long Form</span>
-        </div>
       </div>
     </section>
 
@@ -2038,19 +1935,32 @@
       // ── PORTFOLIO FILTER ──
       function filterPortfolio(format, btn) {
         // Update active button
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
 
-        // Show/hide items
-        document.querySelectorAll(".portfolio-item").forEach((item) => {
-          if (format === "all" || item.getAttribute("data-format") === format) {
-            item.classList.remove("hidden");
-          } else {
-            item.classList.add("hidden");
-          }
-        });
+        const verticalFormats = ["reels", "tiktok", "shorts"];
+        const horizontalFormats = ["longform"];
+
+        const verticalRow = document.querySelector(".vertical-row");
+        const horizontalRow = document.querySelector(".horizontal-row");
+        const rowLabels = document.querySelectorAll(".portfolio-row-label");
+
+        if (format === "all") {
+          // Show both rows and both labels
+          verticalRow.classList.remove("hidden-row");
+          horizontalRow.classList.remove("hidden-row");
+          rowLabels.forEach(l => l.style.display = l.getAttribute("data-lang") === currentLang ? "block" : "none");
+        } else if (verticalFormats.includes(format)) {
+          // Show only vertical row
+          verticalRow.classList.remove("hidden-row");
+          horizontalRow.classList.add("hidden-row");
+          rowLabels.forEach(l => l.style.display = "none");
+        } else if (horizontalFormats.includes(format)) {
+          // Show only horizontal row
+          verticalRow.classList.add("hidden-row");
+          horizontalRow.classList.remove("hidden-row");
+          rowLabels.forEach(l => l.style.display = "none");
+        }
       }
 
       document.addEventListener("DOMContentLoaded", () => setLang("uk"));
