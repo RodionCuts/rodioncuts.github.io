@@ -721,45 +721,85 @@
       }
       .contact-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr 1fr;
         gap: 14px;
       }
       .contact-card {
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: 24px;
+        padding: 28px 32px;
         text-decoration: none;
         color: var(--text);
         display: flex;
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
         transition:
           border-color 0.2s,
-          transform 0.2s;
+          transform 0.2s,
+          background 0.2s;
+      }
+      .contact-card.primary {
+        border-color: rgba(200, 241, 53, 0.3);
+        background: linear-gradient(135deg, rgba(200,241,53,0.06) 0%, var(--surface) 60%);
       }
       .contact-card:hover {
-        border-color: rgba(200, 241, 53, 0.3);
+        border-color: rgba(200, 241, 53, 0.5);
         transform: translateY(-2px);
+        background: var(--surface2);
       }
-      .contact-icon {
-        font-size: 22px;
+      .contact-icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--accent-dim);
+        border: 1px solid rgba(200, 241, 53, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .contact-icon-wrap svg {
+        width: 22px;
+        height: 22px;
+        fill: var(--accent);
+      }
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
       }
       .contact-platform {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.2px;
         color: var(--muted);
       }
       .contact-handle {
         font-family: "Syne", sans-serif;
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .contact-hint {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--muted);
+      }
+      .contact-arrow {
+        margin-left: auto;
+        color: var(--muted);
+        font-size: 18px;
+        flex-shrink: 0;
+        transition: transform 0.2s, color 0.2s;
+      }
+      .contact-card:hover .contact-arrow {
+        transform: translateX(3px);
+        color: var(--accent);
       }
 
       /* FOOTER */
@@ -1389,129 +1429,6 @@
 
     <hr class="full-divider" />
 
-    <!-- REVIEWS -->
-    <section id="reviews">
-      <p
-        class="section-eyebrow"
-        data-lang="uk"
-        class="visible"
-        style="display: block"
-      >
-        Відгуки
-      </p>
-      <p class="section-eyebrow" data-lang="en" style="display: none">
-        Reviews
-      </p>
-      <h2
-        class="section-title"
-        data-lang="uk"
-        class="visible"
-        style="display: block"
-      >
-        Що кажуть клієнти
-      </h2>
-      <h2 class="section-title" data-lang="en" style="display: none">
-        What clients say
-      </h2>
-      <p
-        class="section-sub"
-        data-lang="uk"
-        class="visible"
-        style="display: block"
-      >
-        Замінить ці блоки на реальні відгуки. Навіть один справжній відгук
-        конвертує краще за будь-який текст.
-      </p>
-      <p class="section-sub" data-lang="en" style="display: none">
-        Replace these with real reviews. Even one genuine testimonial converts
-        better than any copy.
-      </p>
-
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p
-            class="review-text"
-            data-lang="uk"
-            class="visible"
-            style="display: block"
-          >
-            «Тут буде реальний відгук вашого клієнта. Попросіть людей, з якими
-            вже працювали, написати кілька речень — це найсильніший елемент
-            конверсії на сторінці.»
-          </p>
-          <p class="review-text" data-lang="en" style="display: none">
-            "This is where a real client review goes. Ask people you've worked
-            with to write a few sentences — it's the strongest conversion
-            element on the page."
-          </p>
-          <div class="review-author">
-            <div class="review-avatar">CA</div>
-            <div>
-              <p class="review-name">Camotec</p>
-              <p
-                class="review-role"
-                data-lang="uk"
-                class="visible"
-                style="display: block"
-              >
-                Бренд амуніції
-              </p>
-              <p class="review-role" data-lang="en" style="display: none">
-                Ammunition brand
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p
-            class="review-text"
-            data-lang="uk"
-            class="visible"
-            style="display: block"
-          >
-            «Другий відгук. Вкажіть конкретний результат: "відео набрало 80к
-            переглядів за тиждень" — цифри працюють краще за слова.»
-          </p>
-          <p class="review-text" data-lang="en" style="display: none">
-            "Second review. Include a specific result: 'the video hit 80k views
-            in a week' — numbers work better than words."
-          </p>
-          <div class="review-author">
-            <div class="review-avatar">КЛ</div>
-            <div>
-              <p
-                class="review-name"
-                data-lang="uk"
-                class="visible"
-                style="display: block"
-              >
-                Клієнт 2
-              </p>
-              <p class="review-name" data-lang="en" style="display: none">
-                Client 2
-              </p>
-              <p
-                class="review-role"
-                data-lang="uk"
-                class="visible"
-                style="display: block"
-              >
-                Контент-мейкер
-              </p>
-              <p class="review-role" data-lang="en" style="display: none">
-                Content creator
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="full-divider" />
-
     <!-- ABOUT -->
     <section id="about">
       <div class="about-grid">
@@ -1784,55 +1701,34 @@
         Contact
       </p>
       <div class="contact-grid">
-        <a class="contact-card" href="https://t.me/Radion_1273" target="_blank">
-          <span class="contact-icon">✈️</span>
-          <span class="contact-platform">Telegram</span>
-          <span class="contact-handle">Radion</span>
-          <span
-            class="contact-hint"
-            data-lang="uk"
-            class="visible"
-            style="display: inline"
-            >Відповідаю за годину</span
-          >
-          <span class="contact-hint" data-lang="en" style="display: none"
-            >Reply within an hour</span
-          >
+        <a class="contact-card primary" href="https://t.me/Radion_1273" target="_blank">
+          <div class="contact-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.367l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.958.192z"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-platform">Telegram</span>
+            <span class="contact-handle">@Radion_1273</span>
+            <span class="contact-hint" data-lang="uk" class="visible" style="display: inline">Відповідаю за годину</span>
+            <span class="contact-hint" data-lang="en" style="display: none">Reply within an hour</span>
+          </div>
+          <span class="contact-arrow">→</span>
         </a>
         <a class="contact-card" href="mailto:kucernukrodion@gmail.com">
-          <span class="contact-icon">✉️</span>
-          <span class="contact-platform">Email</span>
-          <span class="contact-handle">rodion@gmail.com</span>
-          <span
-            class="contact-hint"
-            data-lang="uk"
-            class="visible"
-            style="display: inline"
-            >Для офіційних запитів</span
-          >
-          <span class="contact-hint" data-lang="en" style="display: none"
-            >For official requests</span
-          >
+          <div class="contact-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <span class="contact-platform">Email</span>
+            <span class="contact-handle">kucernukrodion@gmail.com</span>
+            <span class="contact-hint" data-lang="uk" class="visible" style="display: inline">Для офіційних запитів</span>
+            <span class="contact-hint" data-lang="en" style="display: none">For official requests</span>
+          </div>
+          <span class="contact-arrow">→</span>
         </a>
-         <a
-          class="contact-card"
-          href="https://instagram.com/ВАШ_НІК"
-          target="_blank"
-        >
-          <span class="contact-icon">📷</span>
-          <span class="contact-platform">Instagram</span>
-          <span class="contact-handle">@ВАШ_НІК</span>
-          <span
-            class="contact-hint"
-            data-lang="uk"
-            class="visible"
-            style="display: inline"
-            >Приклади робіт</span
-          >
-          <span class="contact-hint" data-lang="en" style="display: none"
-            >Work examples</span
-          >
-        </a> 
       </div>
     </section>
 
