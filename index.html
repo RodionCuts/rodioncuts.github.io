@@ -355,13 +355,51 @@
       .portfolio-item {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: var(--radius);
+        border-radius: var(--radius) var(--radius) 0 0;
         overflow: hidden;
         position: relative;
         transition:
           border-color 0.2s,
           transform 0.2s,
           opacity 0.3s;
+      }
+      /* New card wrapper */
+      .portfolio-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: transform 0.2s, opacity 0.3s;
+      }
+      .portfolio-card.hidden {
+        display: none;
+      }
+      .portfolio-card:hover {
+        transform: translateY(-3px);
+      }
+      .portfolio-card:hover .portfolio-item {
+        border-color: rgba(200, 241, 53, 0.35);
+      }
+      .portfolio-desc {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-top: none;
+        border-radius: 0 0 var(--radius) var(--radius);
+        padding: 12px 14px;
+      }
+      .portfolio-desc-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        margin: 0 0 3px;
+        line-height: 1.3;
+      }
+      .portfolio-desc-sub {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.4;
+        letter-spacing: 0.2px;
       }
       .vertical-row .portfolio-item {
         aspect-ratio: 9/16;
@@ -371,10 +409,6 @@
       }
       .portfolio-item.hidden {
         display: none;
-      }
-      .portfolio-item:hover {
-        border-color: rgba(200, 241, 53, 0.3);
-        transform: translateY(-2px);
       }
       .portfolio-item iframe {
         width: 100%;
@@ -1267,14 +1301,37 @@
         <p class="portfolio-row-label" data-lang="uk" class="visible" style="display:block">Reels / Shorts / TikTok</p>
         <p class="portfolio-row-label" data-lang="en" style="display:none">Reels / Shorts / TikTok</p>
         <div class="portfolio-row vertical-row" data-row="vertical">
-          <div class="portfolio-item" data-format="reels">
-            <iframe
-              src="https://www.youtube.com/embed/TA4OHEIZLI0?rel=0&modestbranding=1&iv_load_policy=3"
-              frameborder="0"
-              allowfullscreen>
-            </iframe>
-            <span class="portfolio-label">Reels · Бренд</span>
-            <span class="portfolio-format-tag tag-reels">Reels</span>
+          <div class="portfolio-card" data-format="reels">
+            <div class="portfolio-item">
+              <iframe
+                src="https://www.youtube.com/embed/TA4OHEIZLI0?rel=0&modestbranding=1&iv_load_policy=3"
+                frameborder="0"
+                allowfullscreen>
+              </iframe>
+              <span class="portfolio-format-tag tag-reels">Reels</span>
+            </div>
+            <div class="portfolio-desc">
+              <p class="portfolio-desc-title" data-lang="uk" class="visible">Подкаст в короткие выпуски</p>
+              <p class="portfolio-desc-title" data-lang="en">Podcast into Shorts</p>
+              <p class="portfolio-desc-sub" data-lang="uk" class="visible">Монтаж · колір · субтитри · музика</p>
+              <p class="portfolio-desc-sub" data-lang="en">Edit · color · subtitles · music</p>
+            </div>
+          </div>
+           <div class="portfolio-card" data-format="reels">
+            <div class="portfolio-item">
+              <iframe
+                src="https://www.youtube.com/embed/V0_X0qwG6Wc?rel=0&modestbranding=1&iv_load_policy=3"
+                frameborder="0"
+                allowfullscreen>
+              </iframe>
+              <span class="portfolio-format-tag tag-reels">Reels</span>
+            </div>
+            <div class="portfolio-desc">
+              <p class="portfolio-desc-title" data-lang="uk" class="visible">Подкаст в короткие выпуски</p>
+              <p class="portfolio-desc-title" data-lang="en">Podcast into Shorts</p>
+              <p class="portfolio-desc-sub" data-lang="uk" class="visible">Монтаж · колір · субтитри · музика</p>
+              <p class="portfolio-desc-sub" data-lang="en">Edit · color · subtitles · music</p>
+            </div>
           </div>
           <!-- Додай більше вертикальних відео сюди -->
         </div>
@@ -1283,23 +1340,52 @@
         <p class="portfolio-row-label" data-lang="uk" class="visible" style="display:block">Long Form</p>
         <p class="portfolio-row-label" data-lang="en" style="display:none">Long Form</p>
         <div class="portfolio-row horizontal-row" data-row="horizontal">
-          <div class="portfolio-item" data-format="longform">
-            <iframe
-              src="https://www.youtube.com/embed/MoYsUYuj4oU?rel=0&modestbranding=1&iv_load_policy=3"
-              frameborder="0"
-              allowfullscreen>
-            </iframe>
-            <span class="portfolio-label">YouTube · Брендове</span>
-            <span class="portfolio-format-tag tag-longform">Long Form</span>
+          <div class="portfolio-card" data-format="longform">
+            <div class="portfolio-item">
+              <iframe
+                src="https://www.youtube.com/embed/MoYsUYuj4oU?rel=0&modestbranding=1&iv_load_policy=3"
+                frameborder="0"
+                allowfullscreen>
+              </iframe>
+              <span class="portfolio-format-tag tag-longform">Long Form</span>
+            </div>
+            <div class="portfolio-desc">
+              <p class="portfolio-desc-title" data-lang="uk" class="visible">Відеомонтаж для YouTube-каналу — LoveBuster</p>
+              <p class="portfolio-desc-title" data-lang="en">YouTube Video Editing — LoveBuster Channel</p>
+              <p class="portfolio-desc-sub" data-lang="uk" class="visible">Монтаж · кольорокорекція · анімація · створення відео за допомогою штучного інтелекту </p>
+              <p class="portfolio-desc-sub" data-lang="en">Edit · color grading · animation · сreating Videos with AI</p>
+            </div>
           </div>
-          <div class="portfolio-item" data-format="longform">
-            <iframe
-              src="https://www.youtube.com/embed/kXf-C9k2v_Q?rel=0&modestbranding=1&iv_load_policy=3"
-              frameborder="0"
-              allowfullscreen>
-            </iframe>
-            <span class="portfolio-label">YouTube · Брендове</span>
-            <span class="portfolio-format-tag tag-longform">Long Form</span>
+          <div class="portfolio-card" data-format="longform">
+            <div class="portfolio-item">
+              <iframe
+                src="https://www.youtube.com/embed/kXf-C9k2v_Q?rel=0&modestbranding=1&iv_load_policy=3"
+                frameborder="0"
+                allowfullscreen>
+              </iframe>
+              <span class="portfolio-format-tag tag-longform">Long Form</span>
+            </div>
+            <div class="portfolio-desc">
+              <p class="portfolio-desc-title" data-lang="uk" class="visible">Wedding Planner Відеомонтаж Для YouTube</p>
+              <p class="portfolio-desc-title" data-lang="en">YouTube Video Editing Wedding Planner </p>
+              <p class="portfolio-desc-sub" data-lang="uk" class="visible">Монтаж · звук · колір· анімація · створення відео за допомогою штучного інтелекту </p>
+              <p class="portfolio-desc-sub" data-lang="en">Edit · sound · color · animation· сreating Videos with AI </p>
+            </div>
+          </div><div class="portfolio-card" data-format="longform">
+            <div class="portfolio-item">
+              <iframe
+                src="https://www.youtube.com/embed/YTQXY21Axlc?rel=0&modestbranding=1&iv_load_policy=3"
+                frameborder="0"
+                allowfullscreen>
+              </iframe>
+              <span class="portfolio-format-tag tag-longform">Long Form</span>
+            </div>
+            <div class="portfolio-desc">
+              <p class="portfolio-desc-title" data-lang="uk" class="visible">Стиль життя фотографа 2</p>
+              <p class="portfolio-desc-title" data-lang="en">Photographer life style 2 </p>
+              <p class="portfolio-desc-sub" data-lang="uk" class="visible">Монтаж · звук · колір· анімація  </p>
+              <p class="portfolio-desc-sub" data-lang="en">Edit · sound · color · animation  </p>
+            </div>
           </div>
           <!-- Додай більше горизонтальних відео сюди -->
         </div>
