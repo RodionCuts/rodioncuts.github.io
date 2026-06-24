@@ -945,7 +945,7 @@
           padding: 64px 20px;
         }
         .portfolio-row.vertical-row {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
         }
         .portfolio-row.horizontal-row {
           grid-template-columns: 1fr;
@@ -1269,7 +1269,7 @@
         <div class="portfolio-row vertical-row" data-row="vertical">
           <div class="portfolio-item" data-format="reels">
             <iframe
-              src="https://www.youtube.com/embed/TA4OHEIZLI0"
+              src="https://www.youtube.com/embed/TA4OHEIZLI0?rel=0&modestbranding=1&iv_load_policy=3"
               frameborder="0"
               allowfullscreen>
             </iframe>
@@ -1285,7 +1285,7 @@
         <div class="portfolio-row horizontal-row" data-row="horizontal">
           <div class="portfolio-item" data-format="longform">
             <iframe
-              src="https://www.youtube.com/embed/MoYsUYuj4oU"
+              src="https://www.youtube.com/embed/MoYsUYuj4oU?rel=0&modestbranding=1&iv_load_policy=3"
               frameborder="0"
               allowfullscreen>
             </iframe>
@@ -1294,7 +1294,7 @@
           </div>
           <div class="portfolio-item" data-format="longform">
             <iframe
-              src="https://www.youtube.com/embed/kXf-C9k2v_Q"
+              src="https://www.youtube.com/embed/kXf-C9k2v_Q?rel=0&modestbranding=1&iv_load_policy=3"
               frameborder="0"
               allowfullscreen>
             </iframe>
@@ -1373,11 +1373,13 @@
               Quick edit of a single video for social media.
             </p>
           </div>
-          <div class="pricing-price">
-            від 500₴
-            <span data-lang="uk" class="visible" style="display: inline"
-              >/ відео</span
-            ><span data-lang="en" style="display: none">/ video</span>
+          <div class="pricing-price" data-lang="uk" class="visible" style="display: block">
+            від 500 грн
+            <span>/ відео</span>
+          </div>
+          <div class="pricing-price" data-lang="en" style="display: none">
+            from $12
+            <span>/ video</span>
           </div>
           <ul class="pricing-list">
             <li data-lang="uk" class="visible">Монтаж до 60 сек</li>
@@ -1437,11 +1439,13 @@
               Full cycle — from raw footage to a publish-ready video.
             </p>
           </div>
-          <div class="pricing-price">
-            від 900₴
-            <span data-lang="uk" class="visible" style="display: inline"
-              >/ відео</span
-            ><span data-lang="en" style="display: none">/ video</span>
+          <div class="pricing-price" data-lang="uk" class="visible" style="display: block">
+            від 900 грн
+            <span>/ відео</span>
+          </div>
+          <div class="pricing-price" data-lang="en" style="display: none">
+            from $22
+            <span>/ video</span>
           </div>
           <ul class="pricing-list">
             <li data-lang="uk" class="visible">Монтаж під ключ</li>
